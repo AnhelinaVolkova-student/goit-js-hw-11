@@ -3,10 +3,7 @@ const error = new Error();
     
 
 export function searchPhoto(query) {
-    if (query === '') {
-        error.code = 'EMPTY_FIELD';
-        throw error;
-    }
+
     return axios.get("https://pixabay.com/api/", {
         params: {
             key: "56969779-79703cf16e75705543728b96e",

@@ -15,6 +15,12 @@ const searchInput = document.querySelector('input');
 searchForm.addEventListener("submit", event => {
     event.preventDefault();
     const inputValue = searchInput.value.trim();
+    if (inputValue === '') {
+        error.code = 'EMPTY_FIELD';
+        throw error;
+        return;
+    }
+    clearGallery();
     showLoader();
     searchPhoto(inputValue)
         .then((hits) => {
