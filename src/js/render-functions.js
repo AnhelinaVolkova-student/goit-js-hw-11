@@ -42,7 +42,7 @@ export function galleryRender(galleryItems) {
 }
 
 export function clearGallery() {
-    galleryForm.innerHTML = " ";
+    galleryForm.innerHTML = "";
 };
 
 const loader = document.querySelector(".loader");

@@ -1,6 +1,12 @@
 import axios from "axios";
+const error = new Error();
+    
 
 export function searchPhoto(query) {
+    if (query === '') {
+        error.code = 'EMPTY_FIELD';
+        throw error;
+    }
     return axios.get("https://pixabay.com/api/", {
         params: {
             key: "56969779-79703cf16e75705543728b96e",
@@ -11,7 +17,6 @@ export function searchPhoto(query) {
         }
     }).then(photos => {
         if (!photos.data.hits.length) {
-            const error = new Error();
             error.code = 'NO_IMAGES';
             throw error;
         } else {

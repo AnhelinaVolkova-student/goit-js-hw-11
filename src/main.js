@@ -14,27 +14,32 @@ const searchInput = document.querySelector('input');
 
 searchForm.addEventListener("submit", event => {
     event.preventDefault();
-    clearGallery();
     const inputValue = searchInput.value.trim();
-    if (inputValue === '') {
-        iziToast.error({
-            message: "Field can't be empty."
+    showLoader();
+    searchPhoto(inputValue)
+        .then((hits) => {
+            clearGallery();
+            galleryRender(hits);
+        })
+        .catch(error => {
+            if (error.code === 'NO_IMAGES') {
+                iziToast.error({
+                    message: 'Sorry, there are no images matching your search query. Please try again!',
+                });
+            } else if (error.code === 'EMPTY_FIELD') {
+                iziToast.error({
+                    message: "Field can't be empty."
+                });
+            } else {
+                iziToast.error({
+                    message: "Something went wrong. Please try again later."
+                });
+                console.error(error);
+            }
+        })
+        .finally(() => {
+            hideLoader();
         });
-    }
-    else {
-        searchPhoto(inputValue)
-            .then((hits) => {
-                galleryRender(hits);
-            })
-            .catch(error => {
-                if (error.code === 'NO_IMAGES') {
-                    iziToast.error({
-                        message: 'Sorry, there are no images matching your search query. Please try again!',
-                    });
-                    return;
-                }
-            });
-    }
 });
 
 
