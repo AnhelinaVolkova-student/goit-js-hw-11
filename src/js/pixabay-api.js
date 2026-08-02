@@ -11,7 +11,9 @@ export function searchPhoto(query) {
         }
     }).then(photos => {
         if (!photos.data.hits.length) {
-            throw new Error();
+            const error = new Error();
+            error.code = 'NO_IMAGES';
+            throw error;
         } else {
             return photos.data.hits;
         }

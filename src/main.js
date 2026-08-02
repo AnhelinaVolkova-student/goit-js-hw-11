@@ -3,18 +3,18 @@ import "izitoast/dist/css/iziToast.min.css";
 
 import { searchPhoto } from "./js/pixabay-api";
 import { galleryRender } from "./js/render-functions";
-import { clearGallery } from "./js/render-functions"
+import { clearGallery } from "./js/render-functions";
+import { showLoader } from "./js/render-functions";
+import { hideLoader } from "./js/render-functions";
 
 const searchForm = document.querySelector("form");
 const searchInput = document.querySelector('input');
-const loader = document.querySelector(".loader");
-loader.style.display = "none";
+
 
 
 searchForm.addEventListener("submit", event => {
     event.preventDefault();
     clearGallery();
-    loader.style.display = "block";
     const inputValue = searchInput.value.trim();
     if (inputValue === '') {
         iziToast.error({
@@ -26,13 +26,15 @@ searchForm.addEventListener("submit", event => {
             .then((hits) => {
                 galleryRender(hits);
             })
-            .catch(() => {
-                iziToast.error({
-                    message: "Sorry, there are no images matching your search query. Please try again!"
-                });
+            .catch(error => {
+                if (error.code === 'NO_IMAGES') {
+                    iziToast.error({
+                        message: 'Sorry, there are no images matching your search query. Please try again!',
+                    });
+                    return;
+                }
             });
     }
-    loader.style.display = "none";
 });
 
 
