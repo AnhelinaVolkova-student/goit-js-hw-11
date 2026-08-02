@@ -10,12 +10,13 @@ import { hideLoader } from "./js/render-functions";
 const searchForm = document.querySelector("form");
 const searchInput = document.querySelector('input');
 
-
+const error = new Error();
 
 searchForm.addEventListener("submit", event => {
     event.preventDefault();
     const inputValue = searchInput.value.trim();
     if (inputValue === '') {
+        hideLoader();
         error.code = 'EMPTY_FIELD';
         throw error;
         return;
@@ -24,7 +25,6 @@ searchForm.addEventListener("submit", event => {
     showLoader();
     searchPhoto(inputValue)
         .then((hits) => {
-            clearGallery();
             galleryRender(hits);
         })
         .catch(error => {
