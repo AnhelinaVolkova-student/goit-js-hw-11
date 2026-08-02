@@ -42,16 +42,6 @@ export function galleryRender(galleryItems) {
     
 }
 
-export function showLoader() {
-    galleryForm.insertAdjacentHTML("beforebegin", '<span class="loader"></span>');
-    
-};
-
-export function hideLoader() {
-    const loader = document.querySelector(".loader");
-    loader.remove();
-}
-
 export function clearGallery() {
     galleryForm.innerHTML = " ";
 };
