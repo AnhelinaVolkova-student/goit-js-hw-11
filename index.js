@@ -22,5 +22,5 @@ import{r as e}from"./assets/rolldown-runtime-hePW80VL.js";import{n as t,r as n,t
                     </li>
                 </ul>
             </a>
-        </li> `).join(``);c.insertAdjacentHTML(`afterbegin`,t),l.refresh()}function d(){c.insertAdjacentHTML(`beforebegin`,`<span class="loader"></span>`)}function f(){document.querySelector(`.loader`).remove()}function p(){c.innerHTML=` `}var m=document.querySelector(`form`),h=document.querySelector(`input`);m.addEventListener(`submit`,e=>{e.preventDefault(),p(),d();let t=h.value.trim();t===``?i.default.error({message:`Field can't be empty.`}):a(t).then(e=>{u(e)}).catch(()=>{i.default.error({message:`Sorry, there are no images matching your search query. Please try again!`})}),f()});
+        </li> `).join(``);c.insertAdjacentHTML(`afterbegin`,t),l.refresh()}function d(){c.innerHTML=` `}var f=document.querySelector(`form`),p=document.querySelector(`input`),m=document.querySelector(`.loader`);m.style.display=`none`,f.addEventListener(`submit`,e=>{e.preventDefault(),d(),m.style.display=`block`;let t=p.value.trim();t===``?i.default.error({message:`Field can't be empty.`}):a(t).then(e=>{u(e)}).catch(()=>{i.default.error({message:`Sorry, there are no images matching your search query. Please try again!`})}),m.style.display=`none`});
 //# sourceMappingURL=index.js.map
