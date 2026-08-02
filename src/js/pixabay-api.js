@@ -15,6 +15,6 @@ export function searchPhoto(query) {
         } else {
             return photos.data.hits;
         }
-    }).catch();
+    });
 };
 

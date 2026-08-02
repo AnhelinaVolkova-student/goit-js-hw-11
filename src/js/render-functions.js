@@ -8,8 +8,6 @@ const galleryForm = document.querySelector(".gallery");
 const gallery = new SimpleLightbox(".gallery a");
 
 export function galleryRender(galleryItems) {
-    galleryForm.insertAdjacentHTML("beforebegin", '<span class="loader"></span>');
-    const loader = document.querySelector(".loader");
     const markup = galleryItems.map((galleryItem) =>
         `<li class="galleryItemForm">
             <a class="gallery-link" href = "${galleryItem.largeImageURL}">    
@@ -41,6 +39,16 @@ export function galleryRender(galleryItems) {
 
     // сообщаем SimpleLightbox о новых ссылках
     gallery.refresh();
+    
+}
+
+export function showLoader() {
+    galleryForm.insertAdjacentHTML("beforebegin", '<span class="loader"></span>');
+    
+};
+
+export function hideLoader() {
+    const loader = document.querySelector(".loader");
     loader.remove();
 }
 
